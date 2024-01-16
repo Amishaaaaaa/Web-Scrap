@@ -14,6 +14,7 @@ def homepage():
     form = soupp.find("form", {"id": "aspnetForm"})
     movie_titles=[]
     movie_codes=[]
+
     if form:
         div1 = form.find("div" , {"id":"containerBg"})
         div2 = div1.find("div")
@@ -22,6 +23,7 @@ def homepage():
         div5 = div4.find("div",{"id":"chart"})
         div6 = div5.find("div" , {"itemtype":"http://schema.org/ItemList"})
         Movielist = []
+
         for entry in div6.find_all("div", {"class":"chartEntry"}):
             movie_title = entry.find("h2", {"class":"movieTitle"}).a.find("span", itemprop="name").text
             movie_link = (entry.find("h2", {"class":"movieTitle"}).a['href'])[7:]
@@ -29,7 +31,6 @@ def homepage():
             movie_codes.append(movie_link)
         movie={"Movie_name" : movie_titles, "Movie_code": movie_codes}
         Movielist.append(movie)
-
     return render_template("index.html", Movielist = Movielist[0])
 
 @app.route("/review", methods = ['POST', 'GET'])
@@ -61,10 +62,8 @@ def index():
                                         if inner6:
                                             inner7 = inner6.find("div", {"id": "commentList"})
                                             if inner7:
-                                                inner8 = inner7.findAll("div" , {"class" : "thread"}) #inner8 is a list of all "thread" class
-                                                
+                                                inner8 = inner7.findAll("div" , {"class" : "thread"}) #inner8 is a list of all "thread" class   
 
-                                                
                     else:
                         print("thoda dhyan se dekh")
                 else:
@@ -76,6 +75,7 @@ def index():
                 username = []
                 date = []
                 review = []
+
                 for i in inner8:
                     totalUsers += 1
                     userName = i.div.div.p.find_all("a" , {"class" : "name"})[0].text
@@ -84,8 +84,6 @@ def index():
                     review.append(comment)
                     timestamp = (i.div.div.p.find_all("span" , {"class" : "timestamp"})[0].text)[3:]
                     date.append(timestamp)
-
-                #if not review:
                     
                 movie_review = {"Username" : username, "DateofReview" : date, "Review" : review}
                 reviews.append(movie_review)
@@ -94,6 +92,7 @@ def index():
                 else:
                     print("empty me aaya hu")    
                     return render_template('empty.html')
+                
             else:
                 print("inner8 is not defined")
                 return render_template('empty.html')
@@ -102,9 +101,9 @@ def index():
             logging.info(e)
             return 'something is wrong'
         
-    
     else:
         return render_template('index.html')
+
 
 if __name__=="__main__":
     app.run(debug=True)
