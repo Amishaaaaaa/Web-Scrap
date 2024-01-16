@@ -3,7 +3,7 @@ import requests
 from flask_cors import CORS,cross_origin
 from bs4 import BeautifulSoup as bs
 #import logging
-logging.basicConfig(filename="scrapper.log", level=logging.INFO)
+#logging.basicConfig(filename="scrapper.log", level=logging.INFO)
 
 app = Flask(__name__)
 
