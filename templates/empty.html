@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+<title>No Reviews</title>
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+
+{% endblock %}
+
+
+{% block body %}
+<div class="table-users">
+    <div class="header">Reviews</div>
+    {{moviename}}
+    <table cellspacing="0">
+        <tr>
+            <th>Username</th>
+            <th>Date</th>
+            <th>Review</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+{% endblock%}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<title>Movie Reviews</title>
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="content">
+    <h1 class="heading" style="text-align: center;">Movie Reviews</h1>
+
+    <div class="form">
+        <form action="/review" method="POST">
+            <input class="search-bar" type="text" name="content" id="content" placeholder="A898B2411B">
+            <input class="search" type="submit" value="Search">
+        </form>
+        <div class="instruction">Paste Movie Code Above</div>
+        <div class="table-div">
+        {% for table_index in range(5) %}
+        <div class="inner-table">
+        <table class="table">
+            <tr>
+                <th>Movie</th>
+                <th>Code</th>
+            </tr>
+            {% for i in range(table_index * 50, (table_index + 1) * 50) %}
+                {% if i < Movielist['Movie_name']|length %}
+                    <tr>
+                        <td>{{ Movielist['Movie_name'][i] }}</td>
+                        <td><div class="column2-3"><div class="column2">{{ Movielist['Movie_code'][i] }}</div><div><button class="copy-button" onclick="copyToClipboard(`{{ Movielist['Movie_code'][i] }}`)">&#128203;</button></div></div></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+    {% endfor %}
+</div>
+    </div>
+</div>
+<script>
+    function copyToClipboard(text) {
+        var textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+    }
+
+    
+</script>
+
+{% endblock %}
