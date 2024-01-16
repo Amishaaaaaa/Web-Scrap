@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import requests
+from flask_cors import CORS,cross_origin
 from bs4 import BeautifulSoup as bs
 #import logging
 logging.basicConfig(filename="scrapper.log", level=logging.INFO)
@@ -7,6 +8,7 @@ logging.basicConfig(filename="scrapper.log", level=logging.INFO)
 app = Flask(__name__)
 
 @app.route("/", methods = ['GET'])
+@cross_origin()
 def homepage():
     url_home = "https://www.flickchart.com/Charts.aspx?perpage=250"
     rr = requests.get(url_home)
@@ -34,6 +36,7 @@ def homepage():
     return render_template("index.html", Movielist = Movielist[0])
 
 @app.route("/review", methods = ['POST', 'GET'])
+@cross_origin()
 def index():
     if request.method == 'POST':
         try:
