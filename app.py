@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import requests
 from bs4 import BeautifulSoup as bs
-import logging
+#import logging
 logging.basicConfig(filename="scrapper.log", level=logging.INFO)
 
 app = Flask(__name__)
@@ -98,7 +98,7 @@ def index():
                 return render_template('empty.html')
             
         except Exception as e:
-            logging.info(e)
+            #logging.info(e)
             return 'something is wrong'
         
     else:
